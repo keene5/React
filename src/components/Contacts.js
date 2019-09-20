@@ -1,28 +1,46 @@
 import React, {Component} from 'react';
-import Header from "../Header";
-import PropTypes from 'prop-types';
-
+import Contact from "./Contact";
 
 class Contacts extends Component {
+    state = {
+        contacts: [
+            {
+                id: 1,
+                name: 'John Doe',
+                email: 'JD@Gmail.com',
+                phone: '555-555-5555'
+            },
+            {
+                id: 2,
+                name: 'Sally Mae',
+                email: 'SM@Gmail.com',
+                phone: '555-555-1111'
+            },
+            {
+                id: 3,
+                name: 'Dirty Harry',
+                email: 'DH@Gmail.com',
+                phone: '555-555-2222'
+            }
+
+        ]
+    }
     render() {
-        const {name, email, phone} = this.props;
+        //destructure contacts from state
+        const {contacts} = this.state;
         return (
             <div>
-                <h4>{name}</h4>
-                <ul>
-                    <li>Email: {email}</li>
-                    <li>Phone: {phone}</li>
-                </ul>
+
+                   {/*use jsx to put code in the component rendered. Here we loop over the state and then put contact info in the Contact component*/}
+                    {contacts.map(contact => (
+                       <Contact key={contact.id} contact={contact}/>
+
+                    ))}
+
 
             </div>
         );
     }
 }
-Contacts.propTypes = {
-
-    name: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-    phone: PropTypes.string.isRequired
-};
 
 export default Contacts;
