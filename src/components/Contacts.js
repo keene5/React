@@ -25,6 +25,17 @@ class Contacts extends Component {
 
         ]
     }
+
+    deleteContact = id => {
+        //first get contacts from state
+        const {contacts} = this.state;
+        //now create a new list without the id and post that as the state of contacts
+        const newContacts = contacts.filter(contact => contact.id != id);
+        //Must use setter 'setState' to change the state since it is immutable
+        this.setState({
+            contacts: newContacts
+        })
+    }
     render() {
         //destructure contacts from state
         const {contacts} = this.state;
@@ -33,8 +44,8 @@ class Contacts extends Component {
 
                    {/*use jsx to put code in the component rendered. Here we loop over the state and then put contact info in the Contact component*/}
                     {contacts.map(contact => (
-                       <Contact key={contact.id} contact={contact}/>
-
+                       <Contact key={contact.id} contact={contact}
+                        deleteClickHandler={this.deleteContact.bind(this, contact.id)}/>
                     ))}
 
 

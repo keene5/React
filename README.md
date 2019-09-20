@@ -1,5 +1,9 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+If you have Yarn installed you can create a react app using this From command line
+'yarn create react-app my-app'
+
+
 ## Available Scripts
 
 In the project directory, you can run:
