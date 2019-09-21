@@ -1,57 +1,44 @@
 import React, {Component} from 'react';
 import Contact from "./Contact";
+//this Is a consumer of context(the Provider) I think similare to Publisher and Subscriber
+import {Consumer} from '../context';
 
 class Contacts extends Component {
-    state = {
-        contacts: [
-            {
-                id: 1,
-                name: 'John Doe',
-                email: 'JD@Gmail.com',
-                phone: '555-555-5555'
-            },
-            {
-                id: 2,
-                name: 'Sally Mae',
-                email: 'SM@Gmail.com',
-                phone: '555-555-1111'
-            },
-            {
-                id: 3,
-                name: 'Dirty Harry',
-                email: 'DH@Gmail.com',
-                phone: '555-555-2222'
-            }
 
-        ]
-    }
+    // deleteContact = id => {
+    //     //first get contacts from state
+    //     const {contacts} = this.state;
+    //     //now create a new list without the id and post that as the state of contacts
+    //     const newContacts = contacts.filter(contact => contact.id !== id);
+    //     //Must use setter 'setState' to change the state since it is immutable
+    //     this.setState({
+    //         contacts: newContacts
+    //     })
+    // }
 
-    deleteContact = id => {
-        //first get contacts from state
-        const {contacts} = this.state;
-        //now create a new list without the id and post that as the state of contacts
-        const newContacts = contacts.filter(contact => contact.id != id);
-        //Must use setter 'setState' to change the state since it is immutable
-        this.setState({
-            contacts: newContacts
-        })
-    }
     render() {
-        //destructure contacts from state
-        const {contacts} = this.state;
         return (
-            <div>
+            //Here we wrap everything in a Consumer
+            <Consumer>
+                {/*Get the contacts from the Provider/state*/}
+                {value => {
+                    const {contacts} = value;
+                    return (
+                        <div>
 
-                   {/*use jsx to put code in the component rendered. Here we loop over the state and then put contact info in the Contact component*/}
-                    {contacts.map(contact => (
-                       <Contact key={contact.id} contact={contact}
-                        deleteClickHandler={this.deleteContact.bind(this, contact.id)}/>
-                    ))}
+                            {/*use jsx to put code in the component rendered. Here we loop over the state and then put contact info in the Contact component*/}
+                            {contacts.map(contact => (
+                                <Contact key={contact.id} contact={contact}
+                                         //deleteClickHandler={this.deleteContact.bind(this, contact.id)}
+                                />
+                            ))}
+                        </div>
+                    );
+                }}
+            </Consumer>
+                );
+                }
+                }
 
 
-            </div>
-        );
-    }
-}
-
-export default Contacts;
+                export default Contacts;

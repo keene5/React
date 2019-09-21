@@ -1,19 +1,25 @@
-import React from 'react';
-import Contacts from './components/Contacts'
-import './App.css';
+import React, {Component} from 'react';
 import Header from "./Header";
-//import 'bootstrap/dist/css/bootstrap.min.css';
+import Contacts from "./components/Contacts";
+import './App.css';
+import {Provider} from './context';
 
-function App() {
-  return (
-<div className="App">
-      <Header branding = "Contact Manager"/>
-    <div className="container">
-        <Contacts/>
-    </div>
+class App extends Component {
+    render() {
+        return (
+            //you must wrap your app in a provider to manage state. In this case we use the Contect API
+            <Provider>
+            <div className="App">
+                <Header branding = "Contact Manager"/>
+                <div className="container">
+                    <Contacts/>
+                </div>
 
-    </div>
-  );
-};
+            </div>
+            </Provider>
+
+        );
+    }
+}
 
 export default App;
